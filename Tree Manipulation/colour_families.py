@@ -1,11 +1,13 @@
 ## Script to colour tips by families
-
 import colorsys
 import pandas as pd
 import random
 import time
 
+# Set depending on whether the family is already in tip or not (i.e. needs to be sourced from taxonomy file)
 family_in_tip = True
+TAXONOMY_CSV="TaxaDataEdited.csv"
+TREEFILE = "partitions_family.contree"
 
 # Generate n colour combinations
 def generate_color_combinations(n):
@@ -29,11 +31,11 @@ def get_family_name(searchTerm, df):
 
 
 # Read Newick Tree File
-with open("partitions_family.contree", 'r') as f:
+with open(TREEFILE, 'r') as f:
     nexusFile = f.read()
 
 # Read the CSV file into a pandas DataFrame
-df = pd.read_csv('TaxaDataEdit.csv')
+df = pd.read_csv(TAXONOMY_CSV)
 df = df.sort_values(by=['Order'], ascending=False)
 
 # Generate unique colours for each family
@@ -85,15 +87,11 @@ for i, line in enumerate(lines):
             
     # time.sleep(0.5)
 
-# print(lines[0:20])
 print("Writing to new file...")
 
 content = "\n".join(lines)
 
-with open("partitions_family_Coloured1.tre", 'w') as f:
+with open(TREEFILE + "_coloured.tre", 'w') as f:
     f.write(content)
 
 print("Wrote to file. Script finished.")
-
-
-#[&!color=#ff3333]

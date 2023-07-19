@@ -49,7 +49,7 @@ print(f"Done. Read {count} tips total.")
 
 print("Writing to file...")
 
-with open("partitions_family.contree", "w") as f:
+with open(TREEFILE + "_family.tre", "w") as f:
     f.write(modifiedFile)
 
 print("Script complete.")
